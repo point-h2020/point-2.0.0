@@ -57,7 +57,7 @@ Fixed the publisher behaviour, ICN-SDN forwardings
 
 Mays AL-Naday   <mfhaln@essex.ac.uk>
 Extended Blackadder, user Library, TM and RM for IP-over-ICN comms,
-ICN-SDN forwarding, SDN in the deployment tool, samples applciations, Fixes, ..etc.
+ICN-SDN forwarding, SDN in the deployment tool, samples appliciations, Fixes, ..etc.
 
 Sebastian Robitzch  <Sebastian.Robitzsch@InterDigital.com>
 Added the NAP for IP-over-ICN comms.
@@ -75,7 +75,7 @@ Mays AL-Naday   <mfhaln@essex.ac.uk>
 Extended Blackadder, user Library, TM and RM for HTTP-over-ICN comms,
 ICN-SDN forwarding, SDN in the deployment tool, samples applciations, fixes, ..etc.
 
-Sebastian Robitzch  <Sebastian.Robitzsch@InterDigital.com>
+Sebastian Robitzsch  <Sebastian.Robitzsch@InterDigital.com>
 Added the NAP for IP/HTTP-over-ICN comms, LTP, Monitoring framework, fixes.
 
 George Petropoulos <geopet@intracom-telecom.com>
