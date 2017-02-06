@@ -1,0 +1,49 @@
+\documentclass[a4paper,11pt,titlepage]{report}
+\usepackage[printonlyused]{acronym}
+\usepackage{amsmath}
+\usepackage[UKenglish]{babel}
+\usepackage{caption}
+\usepackage{color}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{lmodern}
+
+\title{\textbf{MOnitOring SErver (MOOSE)}}
+\author{Sebastian Robitzsch <sebastian.robitzsch@interdigital.com>}
+
+\begin{document}
+\setcounter{secnumdepth}{3} %enumerate up to subsubsection (not paragraph)
+\lstset{language=C++}   
+\maketitle
+\tableofcontents
+\newpage
+\include{acronyms}
+\acresetall
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHAPTER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}\label{ch:Introduction}
+This document should be seen as some sort of \ac{NAP} documentation to bridge the gap between the POINT deliverables and the code documentation available through Doxygen \cite{Heesch}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installation and Configuration}
+The compilation and installation of \ac{MOOSE} has been tested on Debian-based Linux distributions. To compile and install \ac{MOOSE} simply use the make file provisioned with the source code:
+
+\begin{lstlisting}
+	~$ cd ~/blackadder/apps/monitoring/server
+	~$ make
+	~$ sudo make install
+\end{lstlisting}
+
+The installation copies a default libconfig-based template configuration file \texttt{moose.cfg} to \texttt{/etc/moose} which is the default location for \ac{MOOSE}. All parameters which are not commented are mandatory and must be provided. The variables of the array \texttt{dataPoints} are optional.
+
+
+\chapter{Work-flows}
+monitoringServer-MessageStack.eps
+\end{document}

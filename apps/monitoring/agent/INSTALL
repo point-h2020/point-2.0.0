@@ -1,0 +1,10 @@
+= INSTALL =
+The example agent comes with its own make file and must be run after the library
+has been built and installed:
+
+~$ cd apps/monitoring/agent
+~$ make
+
+= CLEAN UP =
+
+~$ make clean

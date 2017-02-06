@@ -1,0 +1,79 @@
+{
+  "ROOT_DIR": "/home/point/blackadder/deployment/",
+  "WRITE_TOPO": "mn_icn_topo/",
+  "MANAGEMENT_NET": "192.168.1.2/24",
+  "CLICK_GLOBAL_CONF":{
+    "BLACKADDER_ID_LENGTH": 8,
+    "LIPSIN_ID_LENGTH": 32,
+    "CLICK_HOME": "/usr/local/",
+    "WRITE_CONF": "/tmp/",
+    "USER": "point",
+    "SUDO": true,
+    "OVERLAY_MODE": "mac"
+  },
+  "cluster_topology": [
+    {
+      "label": "00000012",
+      "testbed_ip": "192.168.1.2",
+      "platform": "mininet",
+      "running_mode": "user",
+      "role": [],
+      "name": "nap1",
+      "promisc": false,
+      "connections": [
+        {
+          "to": "00056100",
+          "src_if": "nap1-eth0",
+          "dst_pt": "2"
+        }
+      ]
+    },
+    {
+      "label": "00056100",
+      "testbed_ip": "192.168.56.100",
+      "running_mode": "user",
+      "platform": "mininet",
+      "role": [],
+      "name": "s1",
+      "operating_system": "ovs",
+      "sdn_implementation": "tables",
+      "bridge": "s1",
+      "connections": [
+        {
+          "to": "00000012",
+          "src_pt": "2",
+          "dst_if": "nap1-eth0",
+          "bridge": "s1"
+        },
+        {
+          "to": "00056200",
+          "src_pt": "3",
+          "dst_pt": "1",
+          "bridge": "s1"
+        }
+      ]
+    },
+    {
+      "label": "00056200",
+      "testbed_ip": "192.168.56.200",
+      "running_mode": "user",
+      "role": [],
+      "name": "core ovs switch",
+      "operating_system": "ovs",
+      "sdn_implementation": "bridges",
+      "bridge": "",
+      "connections": [
+        {
+          "to": "00056100",
+          "src_pt": "1",
+          "dst_pt": "3",
+          "bridge": "br"
+        }
+      ]
+    }
+  ],
+  "clusters":[
+    {"cluster_ip": "192.168.56.100"},
+    {"cluster_ip": "192.168.56.101"},
+  ]
+}
