@@ -27,7 +27,7 @@ class DemoTopo( Topo ):
 		self.addLink(s2, s3)
 		self.addLink(s3, h2)
 		self.addLink(h1, s4)
-                self.addLink(h2, s4)
+		self.addLink(h2, s4)
 if __name__ == "__main__":
 	topo = DemoTopo()
 
@@ -40,20 +40,20 @@ if __name__ == "__main__":
 	net.hosts[0].setIP( ip="192.168.1.2/24", intf=net.hosts[0].intfList()[1] )
 	net.hosts[1].setMAC( mac="00:00:00:00:00:02", intf=net.hosts[1].intfList()[0] )
 	net.hosts[1].setIP( ip="192.168.2.2/24", intf=net.hosts[1].intfList()[0] )
-    	net.hosts[1].setMAC( mac="00:00:00:00:22:22", intf=net.hosts[1].intfList()[1] )
-    	net.hosts[1].setIP( ip="192.168.1.3/24", intf=net.hosts[1].intfList()[1] )
+	net.hosts[1].setMAC( mac="00:00:00:00:22:22", intf=net.hosts[1].intfList()[1] )
+	net.hosts[1].setIP( ip="192.168.1.3/24", intf=net.hosts[1].intfList()[1] )
 	net.start()
 	net.hosts[0].cmd('route add default gw 192.168.1.1 h1-eth1')
-    	net.hosts[1].cmd('route add default gw 192.168.1.1 h2-eth1')
-    	net.hosts[0].cmd('/usr/sbin/sshd &')
-    	net.hosts[1].cmd('/usr/sbin/sshd &')
-    	os.system('cp 00000001.conf /tmp/00000001.conf');
-    	os.system('cp 99999999.conf /tmp/99999999.conf');
-    	os.system('echo 1 | tee /proc/sys/net/ipv4/ip_forward')
+	net.hosts[1].cmd('route add default gw 192.168.1.1 h2-eth1')
+	net.hosts[0].cmd('/usr/sbin/sshd &')
+	net.hosts[1].cmd('/usr/sbin/sshd &')
+	os.system('cp 00000001.conf /tmp/00000001.conf');
+	os.system('cp 99999999.conf /tmp/99999999.conf');
+	os.system('echo 1 | tee /proc/sys/net/ipv4/ip_forward')
 	os.system('ifconfig s4 192.168.1.1/24')
 	os.system('ovs-ofctl -O OpenFlow13 add-flow s4 actions=NORMAL')
 	#Done. Sleep and init click at h1,h2 and resource management server
-    	net.hosts[0].cmd('/usr/local/bin/click /tmp/00000001.conf > /tmp/h1_log 2>&1 &')
-    	net.hosts[1].cmd('/usr/local/bin/click /tmp/99999999.conf > /tmp/h2_log 2>&1 &')
-    	net.hosts[0].cmd('./point-cycle1/apps/resource-manager/server > /tmp/server_log &')
-    	CLI(net)
+	net.hosts[0].cmd('/usr/local/bin/click /tmp/00000001.conf > /tmp/h1_log 2>&1 &')
+	net.hosts[1].cmd('/usr/local/bin/click /tmp/99999999.conf > /tmp/h2_log 2>&1 &')
+	net.hosts[0].cmd('./point-cycle1/apps/icn-sdn/server > /tmp/server_log &')
+	CLI(net)
