@@ -23,7 +23,7 @@ To realize these functionalities, the implemented Opendaylight application consi
 ## Prerequisites
 As ICN-over-SDN is an Opendaylight Boron application, it is essential that the development environment for implementing such applications must be configured properly. Hence, follow the provided instructions by the Opendaylight community, available [here](https://wiki.opendaylight.org/view/GettingStarted:Development_Environment_Setup).  Using these instructions you will be able to install and configure Maven, essential for building the project, and also setup Eclipse, in which you could check the source code and extend its functions.
 
-Finally, the bootstrapping function can be used as standalone as explained later, but generally, this application requires the [Resource Manager](https://github.com/point-h2020/point-cycle1/tree/icom/apps/resource-manager) extension to request and retrieve unique ICN parameters and resources. 
+Finally, the bootstrapping function can be used as standalone as explained later, but generally, this application requires the [ICN-SDN Application](https://github.com/point-h2020/point-2.0.0/tree/master/apps/icn-sdn) extension to request and retrieve unique ICN parameters and resources. 
 
 ## Build & execution instructions
 
@@ -60,9 +60,9 @@ In the above example,
  - *tmInternalLid* is the position of '1' in TM's Internal Link ID (iLID).
  
 ## Arbitrary Bitmask Rules Configuration
-To configure Arbitrary Bitmask (ABM) rules to SDN switches, you can use one of the following alternatives: (a) manually using the controller's existing API, (b) manually using an implemented simplified API, and (c) automatically using the implemented User Interface, as well as the [Resource Manager](https://github.com/point-h2020/point-cycle1/tree/icom/apps/resource-manager) extension.
+To configure Arbitrary Bitmask (ABM) rules to SDN switches, you can use one of the following alternatives: (a) manually using the controller's existing API, (b) manually using an implemented simplified API, and (c) automatically using the implemented User Interface, as well as the [ICN-SDN Application](https://github.com/point-h2020/point-2.0.0/tree/master/apps/icn-sdn) extension.
  
- - Send an HTTP PUT request to [http://localhost:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/2](http://localhost:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/2), replacing "openflow:1", "0" and "2" with the openflow identifier of the switch you want to configure, the table number and the flow identifier you are configuring respectively, including headers for Basic authorization (admin/admin), Content-type and Accept: application/json, and sample body as indicated below. In the body, replace the id, output-node-connector, and ipv6-*-address-* fields with your parameters.
+ - Send an HTTP PUT request to [http://localhost:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/2](http://localhost:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/2), replacing "openflow:1", "0" and "2" with the openflow identifier of the switch you want to configure, the table number and the flow identifier you are configuring respectively, including headers for Basic authorization (admin/admin), Content-type and Accept: application/json, and sample body as indicated below. In the body, replace the id, output-node-connector, and ipv6-\*-address-\* fields with your parameters.
  
 > {
   "flow": {
@@ -189,34 +189,3 @@ From the base URI (http://localhost:8181/restconf), the following set of APIs is
 	 - */operational/registry:node-connector-registry/node-connector-registry-entry/{entry-id}*
 	 
 	 The method which fetches the configured node and link identifier for a specific SDN switch/end-host link with the given {entry-id}.
-
-
-
-## Mininet Example
-
-Assuming you have a Mininet VM (Ubuntu 14.04) deployed, in which Blackadder and other POINT functions are installed (check appropriate instructions in the root folder for this), follow the next steps for a successful example:
-
- - In the Mininet VM, transfer the demo_topo.py, 00000001.conf and 99999999.conf files from the *mininet-example* folder to the home directory.
- - Build the [resource-manager](https://github.com/point-h2020/point-cycle1/tree/icom/apps/resource-manager) application: `make all`
- - Run the python Mininet topology: `sudo python demo_topo.py`
- - In Mininet console, ping all hosts: `pingall`
- - To enable the communication between the SDN controller in the host, and the TM Mininet host in the VM, add a route via the appropriate interface and IP address of your setup: `sudo ip route add 192.168.1.0/24 via 192.168.56.102 dev vboxnet0`. Replace 192.168.56.102 and vboxnet0 with the IP address of your VM and the host-only interface of Virtualbox. To test it `ping 192.168.1.2` (Mininet host). 
- - Configure the SDN controller with the TM parameters (use the ones indicated above)
- - Navigate with your web browser to [http://localhost:8181/index.html](http://localhost:8181/index.html), with username/password: *admin/admin* and go to the ICN-SDN tab at [http://localhost:8181/index.html#/icnsdnui](http://localhost:8181/index.html#/icnsdnui). Press the *Bootstrap Topology* button to initialize the automatic bootstrapping of SDN switches.
- - In your Mininet VM, check that ABM Openflow rules are configured: `sudo ovs-ofctl dump-flows s1 -O OpenFlow13`. You should see entries matching packets of IPv6 type and source or destination addresses. 
- - In the Mininet console execute: `h2 ./point-cycle1/apps/resource-manager/discovery`. If successful, file 00000005.conf will be created in */tmp/* folder.
- - Kill the server and click processes (due to Mininet issues..)
- - Then execute the following commands in the Mininet console:
-
-> h1 /usr/local/bin/click /tmp/00000001.conf > /tmp/h1_log 2>&1 &
-
-> h2 /usr/local/bin/click /tmp/00000005.conf > /tmp/h1_log 2>&1 &
-
-> h1 ./point-cycle1/TopologyManager/tm /tmp/topology.graphml > /tmp/tm_log 2>&1 &
-
-> h1 ./point-cycle1/examples/samples/publisher > /tmp/pub_log &
-
-> h2 ./point-cycle1/examples/samples/subscriber 
-> 
-
-You should see correct published data.

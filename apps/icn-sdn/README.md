@@ -1,4 +1,4 @@
-# The ICN-SDN Applications
+# The ICN-SDN Application
 
 ## Prerequisites
 
