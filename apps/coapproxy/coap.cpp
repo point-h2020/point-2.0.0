@@ -601,23 +601,14 @@ CoAP_packet::CoAP_URI* CoAP_packet::parse(char* uri){
  
     }
 	
-	//debug
-	//std::cout << uri_comp->scheme << "  now parser ptr pos:  " << parser_ptr << " and curstr now: "<< curstr << std:: endl;
-
-	/* URI-Host*/
-	
-	//debug
-	//std::cout <<  "curstr now== "<< curstr << std:: endl;
 
 
 	while(*curstr == '/') 
 		curstr++;
 	parser_ptr=curstr;
 
-	//debug
-	//std::cout << uri_comp->scheme << "  now parser ptr pos:  " << parser_ptr << " and curstr now: "<< curstr << std:: endl;
-
-  
+	
+	  
 	if(*parser_ptr == '['){
 		curstr++;
 		while(*parser_ptr == ']') parser_ptr++;
@@ -625,20 +616,14 @@ CoAP_packet::CoAP_URI* CoAP_packet::parse(char* uri){
 	        
 		while(*parser_ptr != ':' && *parser_ptr != '/') parser_ptr++;
 	}   
-	// std::cout<< "IPv4 end" << std::endl;
+	
 	len=parser_ptr-curstr;
 	uri_comp->host= (char*)malloc((len+1)*sizeof(char));
 	strncpy (uri_comp->host, curstr, len);	
 	*(uri_comp->host + len) = '\0'; 
   
-	//debug
-	//std::cout << uri_comp->host  << std:: endl;
-
 	curstr=parser_ptr;
 	
-	//debug
-	//std::cout << uri_comp->scheme << "  now parser ptr pos:  " << parser_ptr << " and curstr now: "<< curstr << std:: endl;
-
 	/*URI-Port*/
 	if(*parser_ptr == ':') {
 	    curstr=++parser_ptr;
@@ -657,32 +642,22 @@ CoAP_packet::CoAP_URI* CoAP_packet::parse(char* uri){
         }
  
 	
- 
-	//debug
-	//std::cout << " port: "<< uri_comp->port  << std:: endl;
-
-  
+	  
 	/* URI-Path */
 
 	curstr=parser_ptr;
 
-	//std::cout << "current string: "<< curstr  <<" ...parse pointer: "<< parser_ptr << std:: endl;
 	
 	while ( *parser_ptr != '\0' && *parser_ptr != '#' && *parser_ptr != '?') {
         parser_ptr++;
 	}
-	//std::cout << "current string: "<< curstr  <<" ...parse pointer: "<< parser_ptr << std:: endl;
-	
+		
 	len=parser_ptr-curstr;
 	uri_comp->path= (char*)malloc((len+1)*sizeof(char));
 	strncpy (uri_comp->path, curstr, len);	
 	*(uri_comp->path + len) = '\0'; 
   
-	//debug
-	//std::cout << uri_comp->path  << std:: endl;
-
-	/* URI-Query */
-
+		
  	curstr=parser_ptr;
 	if ( *parser_ptr != '\0' && *parser_ptr == '?') {      
            parser_ptr++;
@@ -695,31 +670,12 @@ CoAP_packet::CoAP_URI* CoAP_packet::parse(char* uri){
 	  *(uri_comp->query + len) = '\0'; 
    	}
  
-        /*std::cout << " URI Scheme: " << uri_comp->scheme  << std:: endl
- 	    << " URI host:   " <<  uri_comp->host  << std:: endl	
- 	    << " URI port:   " <<  uri_comp->port  << std:: endl
- 	    << " URI path:   " <<  uri_comp->path  << std:: endl
- 	    << " URI query:  " <<  uri_comp->query  << std:: endl;   
-	*/
-	
-  
+          
+	  
 	return uri_comp;
 
 	
 }
-
-/*
-void CoAP_packet::setParsedURI(CoAP_packet::CoAP_URI* uri){
-	
-	__coapuri=(CoAP_packet::CoAP_URI*)malloc(sizeof(CoAP_packet::CoAP_URI));
-	
-	__coapuri->scheme=uri->scheme;
-	__coapuri->host=uri->host;
-	__coapuri->port= uri->port;
-	__coapuri->path = uri->path;
-	__coapuri->query=uri->query;
-
-}*/
 
 /*
  * return the parsed CoAP_URI 
