@@ -68,7 +68,7 @@ Extended support for NS3
 George Petropoulos <geopet@intracom-telecom.com>
 Extended the deployment tool with the dynamic support for addition/deletion of nodes
 
-Contributors of POINT Cycle-1
+Contributors of POINT Cycle-2
 =============================
 
 Mays AL-Naday   <mfhaln@essex.ac.uk>
@@ -81,7 +81,7 @@ Added the NAP for IP/HTTP-over-ICN comms, LTP, Monitoring framework, fixes.
 George Petropoulos <geopet@intracom-telecom.com>
 SDN POINT application, ICN-SDN application, ODL deployment.
 
-Islam Hasan <hasan.islam@aalto.fi>
+Hasan Mahmood Aminul Islam <hasan.islam@aalto.fi>
 CoAP Forward/Reverse Proxy
 
 eero hakala <eero.k.hakala@gmail.com>
