@@ -13,5 +13,5 @@ $make
 How to Run and configuration
 ============================ 
 
-Follow the instruction of blackadder/doc/Examples/HowToCoAP.pdf
+Follow the instruction of blackadder/doc/Examples/coap_over_ip_over_icn.pdf
 
