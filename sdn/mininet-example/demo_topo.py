@@ -55,5 +55,5 @@ if __name__ == "__main__":
 	#Done. Sleep and init click at h1,h2 and resource management server
 	net.hosts[0].cmd('/usr/local/bin/click /tmp/00000001.conf > /tmp/h1_log 2>&1 &')
 	net.hosts[1].cmd('/usr/local/bin/click /tmp/99999999.conf > /tmp/h2_log 2>&1 &')
-	net.hosts[0].cmd('./point-cycle1/apps/icn-sdn/server > /tmp/server_log &')
+	net.hosts[0].cmd('./point-2.0.0/apps/icn-sdn/server > /tmp/server_log &')
 	CLI(net)
